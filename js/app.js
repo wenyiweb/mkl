@@ -2,6 +2,7 @@
 var IMG_PATH = '';//资源文件地址
 var filelist = ['images/bg.jpg','images/star.png','images/award.png','images/y1.png','images/y2.png','images/y3.png','images/y4.png','images/y5.png','images/y6.png','images/y7.png','images/light.png','images/brands.png','images/bigbg.jpg','images/tip.png','images/cloud.png','images/cup2.png','images/vaseline_3.png','images/pb.jpg','images/vt.png','images/lk.png','images/k.png','images/kl.png','images/button.png','images/pst.png','images/share.png'];
 var audio;
+var canv;
 function fade(id,type,cb){
 	var ele = document.querySelector(id);
 	if(type == 'out'){
@@ -33,37 +34,45 @@ function coverFn(){
 			$('.yun-content,.door-content').hide();
 			setTimeout(productFn,2000);
 		})
-	})
+	});
 }
 
 //产品页处理
 function productFn(){
-	$('.cover').addClass('out').css('opacity',0);
+	$('.cover').addClass('out');
+	$('.product').addClass('on');
+	$('.product').one('webkitTransitionEnd',function(){
+		$('.cover').hide();
+	})
 	/*fade('.product','in',function(){
 		$('.product').addClass('on');
 		$('.cover').hide();
 	});*/
-	$('.product').fadeIn('1000',function(){
+	/*$('.product').fadeIn('1000',function(){
 		$('.product').addClass('on');
 		$('.cover').hide();
-	})
+	})*/
+	$('.product .open').on('tap',function(){
+		searchRose();
+	});
 	$('.product .tip .hand').one('webkitAnimationEnd',function(){
 		$('.product .tip').fadeOut();
-	})
-	$('.open').on('click',function(){
-		searchRose();
-	})
+	});	
 }
 //寻找玫瑰
 function searchRose(){
 	var rosecount = 0;
-	$('.product').fadeOut('slow');
-	$('.search-rose').fadeIn('slow').addClass('on');
-	$('.rose-content .rose').one('touchend',function(){
+	$('.product').addClass('out');
+	$('.search-rose').addClass('on');
+	$('.search-rose').one('webkitTransitionEnd',function(){
+		$('.product').hide();
+	});
+	$('.search-rose .rose').one('touchend',function(){
+		$('.search-rose .tip').css('-webkit-animation','none').fadeOut();
 		rosecount++;
-		console.log(rosecount)
+		$(this).addClass('animatenone');
 		if(rosecount==4){
-			$('.rose-content .rose').addClass('animatenone');
+			//$('.rose-content .rose').addClass('animatenone');
 			$('.search-rose .mask').fadeIn('600',function(){
 				$('.search-rose .rose1').css({
 					'-webkit-transform':'translate3d('+($('.basket').offset().left-$('.rose1').offset().left+27)+'px,'+($('.basket').offset().top-$('.rose1').offset().top+176)+'px,0)'
@@ -82,15 +91,18 @@ function searchRose(){
 	});
 	$('.rose4').on('webkitTransitionEnd',function(){
 		collectRose();
-	})
-	
+	});	
 }
 //收集玫瑰
 function collectRose(){
 	var rosecount = 0;
-	$('.search-rose').fadeOut();
-	$('.collect-rose').fadeIn().addClass('on');
+	$('.search-rose').addClass('out');
+	$('.collect-rose').addClass('on');
+	$('.collect-rose').one('webkitTransitionEnd',function(){
+		$('.search-rose').hide();
+	});
 	$('.collect-rose .rose').one('touchend',function(){
+		$('.collect-rose .tip,.collect-rose .hand').fadeOut();
 		rosecount++;
 		$(this).css('-webkit-animation','none');
 		if(rosecount==4){
@@ -99,19 +111,75 @@ function collectRose(){
 	});
 }
 //canvas
-function crease(){
-	var canv = canvas('canvas',canvasImg);
-	$('collect-rose').fadeOut();
-	$('.mkl-po').fadeIn(function(){
-		canv.handle();
+function crease(){	
+	$('.collect-rose').addClass('out');
+	$('.mkl-po').addClass('on');
+	$('.mkl-po').one('webkitTransitionEnd',function(){
+		$('.collect-rose').hide();
 	});
+	canv.handle();
+	/*$('.mkl-po').fadeIn(function(){
+		canv.handle();
+	});*/
 	
 }
 //apply
 function applyFn(){
-	$('.mkl-po').fadeOut();
-	$('.apply-page').fadeIn();
+	$('.mkl-po').addClass('out');
+	$('.apply-page').addClass('on');
+	$('.apply-page').one('webkitTransitionEnd',function(){
+		$('.mkl-po').hide();
+	});
+	$('.apply').on('click',function(){
+		addUser();
+	})
 }
+//报名
+function addUser(){
+		var url = "http://www.cosmopolitan.com.cn/files/eventapi.php?c=EventApiNew&a=AddEvent&indexsId=617&callbackfun=addUserCallback";  
+		var name = $('#form_name').val();
+		var phone = $('#form_tel').val();
+		var wish = $('#form_wish').val();
+		var phoneReg = /^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|18[0-9]{9}$/;
+		if(name==''||name=='姓名'){
+			alert('万一中奖了，怎么称呼您？');
+			$('#form_name').focus();
+			return false;
+		}
+		if(phone==''){
+			alert('万一中奖了，没电话怎么联系您啊');
+			$('#form_tel').focus();
+			return;
+		}else if(!phone.match(phoneReg)){
+			alert('请输入正确的手机号码');
+			$('#form_tel').focus();
+			return false;
+		}
+		if(wish==''){
+			alert('不输入愿望吗？');
+			$('#form_wish').focus();
+			return false;
+		}
+		var data = { 
+			"data[2473]": phone,//手机 
+			"data[2474]": name,//真实姓名 
+			"data[2475]": wish,//願望
+		};
+		$.ajax({
+			url:url,
+			data:data,
+			type:"GET",
+			dataType:'jsonp',
+		});
+	}
+	function addUserCallback(res){
+		if(res.status == 1){
+			alert('成功')
+			//wishFn();
+		}else{
+			alert(res.info);
+		}
+	}
 function canvas(id,src){
 
   var canvas,ctx,x1,y1,a=60,timer,
@@ -274,6 +342,7 @@ $('body').css('height',wh);
 $('.loading').height(wh).css({'overflow':'hidden'});
 load(function(){
 	coverFn();
+	canv = canvas('canvas',canvasImg);
 	//blingFn.testplay();
 	//audio = new Audio();
 	//audio.init();
