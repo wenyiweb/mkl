@@ -10,13 +10,13 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 } 
-body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left top; */max-width: 640px;margin: 0 auto;overflow: hidden;}
+body{width:100%;height: 100%;position: relative;/* background: url(../images/bg.jpg) no-repeat left top; */max-width: 640px;margin: 0 auto;overflow: hidden;}
 .none{display: none;}
 .ab{position: absolute;}
 .audio{width: 60px;height: 60px;position: absolute;z-index: 200;top: 50px;right: 22px;background-image: url(../images/audio-c.png);background-repeat: no-repeat;background-size: 100% 100%;display: none;
     &.on{background-image: url(../images/audio.png);}
 }
-.loading{width: 100%;height: 100%;background: url(../images/bg.jpg) no-repeat left top;z-index: 999;transition:opacity 1s ease-in-out;
+.loading{width: 100%;height: 100%;background: url(../images/bg.jpg) no-repeat center top;z-index: 999;transition:opacity 1s ease-in-out;
 	img{width: 100%;}
 	.bg{width: 100%;height: 100%;background: url(../images/loading.png);background-position: 0 0;
 		&.bg2{background-position: 0 1136px;animation:l2r 4s forwards linear infinite}
@@ -92,14 +92,15 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 }
 .product{width: 100%;height: 100%;z-index: 18;background: url(../images/po.jpg) no-repeat;opacity: 0;-webkit-transform:translateZ(50px) scale(1.2,1.2);-webkit-transition:all 2s 1s ease-in-out;
 	.detail{width: 202px;height: 240px;top: 668px;left: 34px;opacity: 0;-webkit-transform:translate3d(-200px,0,0);-webkit-transition:all 1.2s 3s ease-in-out;}
-	.tip{width: 188px;height: 210px;top: 668px;right: 30px;
+	.tip{width: 188px;height: 210px;top: 705px;right: 14px;
 		.hand{width: 107px;height: 89px;background: url(../images/hand.png) no-repeat;}
 		.tipd{width: 188px;height: 75px;background: url(../images/tipd.png) no-repeat;}
 	}
+	//.hb{width: 100%;height: 100%;z-index: 2;}
 	.open{width: 125px;height: 100px;z-index: 3;left: 328px;top: 628px;}
 	&.on{
 		opacity: 1;-webkit-transform:translateZ(0px) scale(1,1);
-		.tip .hand{-webkit-animation:scale 3s 3s 2 forwards linear;}
+		.tip .hand{-webkit-animation:scale 3s 3s infinite forwards linear;}
 		.detail{opacity: 1;-webkit-transform:translate3d(0,0,0)}
 		&.out{
 			-webkit-transition-delay:0.5s;
@@ -121,13 +122,7 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 	.desc{z-index: 4;width: 40px;font-size: 32px;color: #fff;top: 20px;right: 25px;line-height: 32px;word-wrap: break-word;-webkit-transform:translateY(100px);opacity: 0;-webkit-transition:all 1.2s 3.5s ease-in-out;}
 	.desc2{right: 65px;-webkit-transition-delay:4.1s;}
 	.mask{width: 100%;height: 100%;background: rgba(0,0,0,0.7);position: absolute;top: 0;left: 0;z-index: 2;display: none;/* opacity: 0;-webkit-transition:all 1.2s ease-in-out; */}
-	.hb1,.hb2{width: 82px;height: 104px;background: url(../images/hb2.png) no-repeat;}
-	.hb3,.hb4{width: 52px;height: 75px;background: url(../images/hb1.png) no-repeat;}
-	.hb1{left: 422px;top: 58px;}
-	.hb2{left: 155px;top: 357px;}
-	.hb3{left: 240px;}
-	.hb4{left: 300px;top: 300px;}
-	.hb{width: 100%;height: 100%;z-index: 2;}
+	//.hb{width: 100%;height: 100%;z-index: 2;}
 	&.on{
 		opacity: 1;
 		.basket,.desc{opacity: 1;-webkit-transform:translateY(0);}
@@ -138,31 +133,11 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 		.rose3{-webkit-animation-delay:0.4s;}
 		.rose4{-webkit-animation-delay:0.6s;}
 		.rose.animatenone{-webkit-animation:none;}
-		.hb1{-webkit-animation:hb1 8s infinite both ease-in-out;}
-		.hb1{-webkit-animation:hb1 8s 1s infinite both ease-in-out;}
-		.hb1{-webkit-animation:hb1 8s infinite both ease-in-out;}
-		.hb1{-webkit-animation:hb1 8s 1s infinite both ease-in-out;}
 		&.out{
 			opacity: 0;
 			-webkit-transition-delay:0.5s;
 		}
 	}
-}
-@-webkit-keyframes hb1{
-	0%{-webkit-transform:translateY(0)}
-	100%{-webkit-transform:translateY(980px)}
-}
-@-webkit-keyframes hb2{
-	0%{-webkit-transform:translateY(0)}
-	100%{-webkit-transform:translateY(680px)}
-}
-@-webkit-keyframes hb3{
-	0%{-webkit-transform:translateY(0)}
-	100%{-webkit-transform:translateY(1050px)}
-}
-@-webkit-keyframes hb4{
-	0%{-webkit-transform:translateY(0)}
-	100%{-webkit-transform:translateY(780px)}
 }
 .collect-rose{
 	width: 100%;height: 100%;z-index: 14;background: url(../images/collect-rose.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
@@ -191,6 +166,10 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 }
 .mkl-po{
 	width: 100%;height: 100%;z-index: 12;background: url(../images/complete.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
+	.hand-tip{width: 300px;height: 250px;bottom: 80px;right: 0;z-index: 41;
+		.hand{width: 163px;height: 178px;background: url(../images/hand2.png) no-repeat;}
+		.tip{width: 242px;height: 105px;background: url(../images/tm.png) no-repeat;}
+	}
 	#canvas{
 	    width: 100%;
 	    height: 100%;
@@ -201,6 +180,7 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 	}
 	&.on{
 		opacity: 1;
+		.hand-tip .hand{-webkit-animation:l2r 1s infinite forwards ease-in-out;}
 		&.out{
 			opacity: 0;
 			-webkit-transition-delay:0.5s;
@@ -264,9 +244,8 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 	50%{transform:translateX(5px)}
 }
 @keyframes l2r{
-	0%,50%,100%{transform:translateX(0);}
-	25%{transform:translateX(8px);}
-	75%{transform:translateX(-8px);}
+	0%,100%{transform:translateX(0);}
+	50%{transform:translateX(40px);}
 }
 @keyframes l2r2{
 	0%,50%,100%{transform:translateX(0);}

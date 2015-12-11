@@ -77,8 +77,8 @@
 					'zIndex': options.flakeIndex
 				});
 				if ($(element).get(0).tagName === $(document).get(0).tagName) {
-					$('.hb').append(flakeMarkup);
-					element = $('.hb');
+					$('body').append(flakeMarkup);
+					element = $('body');
 				} else {
 					$(element).append(flakeMarkup);
 				}
