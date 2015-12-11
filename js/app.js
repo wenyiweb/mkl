@@ -61,6 +61,16 @@ function productFn(){
 }
 //寻找玫瑰
 function searchRose(){
+	$(document).snowfall('clear');
+    $(document).snowfall({
+        image: "images/hb2.png",
+        flakeCount:5,
+        minSize: 5,
+        maxSize: 22,
+        maxSpeed: 2,
+        collection:'.hb'
+    });
+
 	var rosecount = 0;
 	$('.product').addClass('out');
 	$('.search-rose').addClass('on');

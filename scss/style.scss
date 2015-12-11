@@ -121,6 +121,13 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 	.desc{z-index: 4;width: 40px;font-size: 32px;color: #fff;top: 20px;right: 25px;line-height: 32px;word-wrap: break-word;-webkit-transform:translateY(100px);opacity: 0;-webkit-transition:all 1.2s 3.5s ease-in-out;}
 	.desc2{right: 65px;-webkit-transition-delay:4.1s;}
 	.mask{width: 100%;height: 100%;background: rgba(0,0,0,0.7);position: absolute;top: 0;left: 0;z-index: 2;display: none;/* opacity: 0;-webkit-transition:all 1.2s ease-in-out; */}
+	.hb1,.hb2{width: 82px;height: 104px;background: url(../images/hb2.png) no-repeat;}
+	.hb3,.hb4{width: 52px;height: 75px;background: url(../images/hb1.png) no-repeat;}
+	.hb1{left: 422px;top: 58px;}
+	.hb2{left: 155px;top: 357px;}
+	.hb3{left: 240px;}
+	.hb4{left: 300px;top: 300px;}
+	.hb{width: 100%;height: 100%;z-index: 2;}
 	&.on{
 		opacity: 1;
 		.basket,.desc{opacity: 1;-webkit-transform:translateY(0);}
@@ -131,16 +138,36 @@ body{width:100%;height: 100%;/* background: url(../images/bg.jpg) no-repeat left
 		.rose3{-webkit-animation-delay:0.4s;}
 		.rose4{-webkit-animation-delay:0.6s;}
 		.rose.animatenone{-webkit-animation:none;}
+		.hb1{-webkit-animation:hb1 8s infinite both ease-in-out;}
+		.hb1{-webkit-animation:hb1 8s 1s infinite both ease-in-out;}
+		.hb1{-webkit-animation:hb1 8s infinite both ease-in-out;}
+		.hb1{-webkit-animation:hb1 8s 1s infinite both ease-in-out;}
 		&.out{
 			opacity: 0;
 			-webkit-transition-delay:0.5s;
 		}
 	}
 }
+@-webkit-keyframes hb1{
+	0%{-webkit-transform:translateY(0)}
+	100%{-webkit-transform:translateY(980px)}
+}
+@-webkit-keyframes hb2{
+	0%{-webkit-transform:translateY(0)}
+	100%{-webkit-transform:translateY(680px)}
+}
+@-webkit-keyframes hb3{
+	0%{-webkit-transform:translateY(0)}
+	100%{-webkit-transform:translateY(1050px)}
+}
+@-webkit-keyframes hb4{
+	0%{-webkit-transform:translateY(0)}
+	100%{-webkit-transform:translateY(780px)}
+}
 .collect-rose{
 	width: 100%;height: 100%;z-index: 14;background: url(../images/collect-rose.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
 	.rose1{width: 79px;height: 77px;background: url(../images/r1.png) no-repeat;top: 540px;left: 120px;}
-	.rose2{width: 60px;height: 57px;background: url(../images/r2.png) no-repeat;top: 545px;left: 465px;}
+	.rose2{width: 60px;height: 57px;background: url(../images/r2.png) no-repeat;top: 545px;left: 405px;}
 	.rose3{width: 53px;height: 51px;background: url(../images/r3.png) no-repeat;top: 600px;left: 521px;}
 	.rose4{width: 81px;height: 69px;background: url(../images/r4.png) no-repeat;top: 697px;left: 199px;}
 	.tip{z-index: 4;width: 281px;height: 122px;background: url(../images/collect-tip.png) no-repeat;bottom: 200px;left: 320px;opacity: 0;-webkit-transition:all 0.5s 4.5s ease-in-out;}
