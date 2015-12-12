@@ -61,6 +61,7 @@ function productFn(){
 		$('.cover').hide();
 	})*/
 	$('.product .open').on('tap',function(){
+		$(document).snowfall('clear');
 		searchRose();
 	});
 	/*$('.product .tip .hand').one('webkitAnimationEnd',function(){
@@ -90,6 +91,7 @@ function searchRose(){
 		rosecount++;
 		$(this).addClass('animatenone');
 		if(rosecount==4){
+			$(document).snowfall('clear');
 			//$('.rose-content .rose').addClass('animatenone');
 			$('.search-rose .mask').fadeIn('600',function(){
 				$('.search-rose .rose1').css({
