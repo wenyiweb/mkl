@@ -195,11 +195,15 @@ function addUser(){
 	}
 	function addUserCallback(res){
 		if(res.status == 1){
-			alert('成功')
-			//wishFn();
+			//alert('成功')
+			applySucc
 		}else{
 			alert(res.info);
 		}
+	}
+	function applySucc(){
+		$('.apply-page .detail,.apply-page tip,.apply-page form,.apply-page apply').fadeOut();
+		$('.apply-page p').fadeIn();
 	}
 function canvas(id,src){
 
