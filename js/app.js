@@ -196,14 +196,16 @@ function addUser(){
 	function addUserCallback(res){
 		if(res.status == 1){
 			//alert('成功')
-			applySucc
+			applySucc();
 		}else{
 			alert(res.info);
 		}
 	}
 	function applySucc(){
-		$('.apply-page .detail,.apply-page tip,.apply-page form,.apply-page apply').fadeOut();
-		$('.apply-page p').fadeIn();
+		$('.suc').fadeOut(function(){
+			$('.apply-page p').fadeIn();
+		});
+		
 	}
 function canvas(id,src){
 
@@ -370,54 +372,9 @@ load(function(){
 	coverFn();
 	canv = canvas('canvas',canvasImg);
 	//blingFn.testplay();
-	//audio = new Audio();
-	//audio.init();
+	audio = new Audio();
+	audio.init();
 });
-//报名
-function addUser(){
-		var url = "http://www.cosmopolitan.com.cn/files/eventapi.php?c=EventApiNew&a=AddEvent&indexsId=617&callbackfun=addUserCallback";  
-		var name = $('#form_name').val();
-		var phone = $('#form_tel').val();
-		var wish = $('#form_wish').val();
-		var phoneReg = /^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|18[0-9]{9}$/;
-		if(name==''||name=='姓名'){
-			alert('万一中奖了，怎么称呼您？');
-			$('#form_name').focus();
-			return false;
-		}
-		if(phone==''){
-			alert('万一中奖了，没电话怎么联系您啊');
-			$('#form_tel').focus();
-			return;
-		}else if(!phone.match(phoneReg)){
-			alert('请输入正确的手机号码');
-			$('#form_tel').focus();
-			return false;
-		}
-		if(wish==''){
-			alert('不输入愿望吗？');
-			$('#form_wish').focus();
-			return false;
-		}
-		var data = { 
-			"data[2473]": phone,//手机 
-			"data[2474]": name,//真实姓名 
-			"data[2475]": wish,//願望
-		};
-		$.ajax({
-			url:url,
-			data:data,
-			type:"GET",
-			dataType:'jsonp',
-		});
-	}
-	function addUserCallback(res){
-		if(res.status == 1){
-			wishFn();
-		}else{
-			alert(res.info);
-		}
-	}
 
 function Audio(){
 	this.aud = document.querySelector('.audio');
