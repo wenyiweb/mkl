@@ -89,8 +89,31 @@ function searchRose(){
 	$('.search-rose .rose').one('touchend',function(){
 		$('.search-rose .tip').css('-webkit-animation','none').fadeOut();
 		rosecount++;
+		var id = $(this).data('id');
 		$(this).addClass('animatenone');
-		if(rosecount==4){
+		if(id==1){
+			$('.search-rose .rose1').css({
+				'-webkit-transform':'translate3d('+($('.basket').offset().left-$('.rose1').offset().left+27)+'px,'+($('.basket').offset().top-$('.rose1').offset().top+176)+'px,0)'
+			});
+		}else if(id == 2){
+			$('.search-rose .rose2').css({
+				'-webkit-transform':'translate3d('+($('.basket').offset().left-$('.rose2').offset().left+125)+'px,'+($('.basket').offset().top-$('.rose2').offset().top+132)+'px,0)'
+			});
+		}else if(id == 3){
+			$('.search-rose .rose3').css({
+				'-webkit-transform':'translate3d('+($('.basket').offset().left-$('.rose3').offset().left+66)+'px,'+($('.basket').offset().top-$('.rose3').offset().top+149)+'px,0)'
+			});
+		}else if(id == 4){
+			$('.search-rose .rose4').css({
+				'-webkit-transform':'translate3d('+($('.basket').offset().left-$('.rose4').offset().left+130)+'px,'+($('.basket').offset().top-$('.rose4').offset().top+200)+'px,0)'
+			});
+		}
+		if(rosecount == 4){
+			$('.rose'+id).on('webkitTransitionEnd',function(){
+				collectRose();
+			});	
+		}
+		/*if(rosecount==4){
 			$(document).snowfall('clear');
 			//$('.rose-content .rose').addClass('animatenone');
 			$('.search-rose .mask').fadeIn('600',function(){
@@ -107,11 +130,11 @@ function searchRose(){
 					'-webkit-transform':'translate3d('+($('.basket').offset().left-$('.rose4').offset().left+130)+'px,'+($('.basket').offset().top-$('.rose4').offset().top+200)+'px,0)'
 				});
 			});
-		}
+		}*/
 	});
-	$('.rose4').on('webkitTransitionEnd',function(){
+	/*$('.rose4').on('webkitTransitionEnd',function(){
 		collectRose();
-	});	
+	});	*/
 }
 //收集玫瑰
 function collectRose(){
@@ -261,9 +284,10 @@ function canvas(id,src){
 
   function end(){
   	canvas.style.display = 'none';
+  	$('.mkl-po .content').fadeIn();
   	setTimeout(function(){
   		applyFn();
-  	},3000);
+  	},2000);
 	canvas.addEventListener('webkitTransitionEnd',function(){
 	  canvas.style.display = 'none';
 	 // box.add(2);
@@ -365,9 +389,14 @@ function  load(cb){
   img.src = src;
 }
 var wh =  $(window).height();
-$('body').css('height',wh);
+var ww = $(window).width();
+$('body,.loading,.cover,.product,.search-rose,.collect-rose,.mkl-po,.apply-page').css({
+	'overflow':'hidden',
+	'height':wh,
+	'width':ww
+});
 
-$('.loading').height(wh).css({'overflow':'hidden'});
+//$('.loading').height(wh).css({'overflow':'hidden'});
 load(function(){
 	coverFn();
 	canv = canvas('canvas',canvasImg);

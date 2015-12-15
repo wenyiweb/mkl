@@ -16,7 +16,7 @@ body{width:100%;height: 100%;position: relative;/* background: url(../images/bg.
 .audio{width: 60px;height: 60px;position: absolute;z-index: 200;top: 50px;right: 22px;background-image: url(../images/audio-c.png);background-repeat: no-repeat;background-size: 100% 100%;display: none;
     &.on{background-image: url(../images/audio.png);}
 }
-.loading{width: 100%;height: 100%;background: url(../images/bg.jpg) no-repeat center top;z-index: 999;transition:opacity 1s ease-in-out;
+.loading{width: 100%;height: 100%;background: url(../images/bg.jpg) no-repeat center top;z-index: 999;transition:opacity 1s ease-in-out;overflow: hidden;
 	img{width: 100%;}
 	.bg{width: 100%;height: 100%;background: url(../images/loading.png);background-position: 0 0;
 		&.bg2{background-position: 0 1136px;animation:l2r 4s forwards linear infinite}
@@ -90,7 +90,7 @@ body{width:100%;height: 100%;position: relative;/* background: url(../images/bg.
 		-webkit-transform:translateZ(-50px) scale(3,3);
 	}
 }
-.product{width: 100%;height: 100%;z-index: 18;background: url(../images/po.jpg) no-repeat;opacity: 0;-webkit-transform:translateZ(50px) scale(1.2,1.2);-webkit-transition:all 2s 1s ease-in-out;
+.product{width: 100%;height: 100%;z-index: 18;background: url(../images/po.jpg) no-repeat;opacity: 0;-webkit-transform:translateZ(50px) scale(1.2,1.2);-webkit-transition:all 2s 1s ease-in-out;overflow: hidden;
 	.detail{width: 202px;height: 240px;top: 668px;left: 34px;opacity: 0;-webkit-transform:translate3d(-200px,0,0);-webkit-transition:all 1.2s 3s ease-in-out;}
 	.tip{width: 188px;height: 210px;top: 705px;right: 14px;
 		.hand{width: 107px;height: 89px;background: url(../images/hand.png) no-repeat;}
@@ -109,13 +109,13 @@ body{width:100%;height: 100%;position: relative;/* background: url(../images/bg.
 	}
 }
 .search-rose{
-	width: 100%;height: 100%;z-index: 16;background: url(../images/search-rose.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
+	overflow: hidden;width: 100%;height: 100%;z-index: 16;background: url(../images/search-rose.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
 	.rose-content{
 		width: 100%;height: 100%;top: 0;z-index: 3;
-		.rose1{width: 100px;height: 97px;background: url(../images/rose1.png) no-repeat;top: 28px;left: 182px;-webkit-transition-delay:0s;}
-		.rose2{width: 121px;height: 118px;background: url(../images/rose2.png) no-repeat;top: 122px;left: 270px;-webkit-transition-delay:0.4s;}
-		.rose3{width: 109px;height: 130px;background: url(../images/rose3.png) no-repeat;top: 268px;left: 378px;-webkit-transition-delay:0.8s;}
-		.rose4{width: 92px;height: 101px;background: url(../images/rose4.png) no-repeat;top: 506px;left: 234px;-webkit-transition-delay:1.2s;}
+		.rose1{width: 100px;height: 97px;background: url(../images/rose1.png) no-repeat;top: 28px;left: 182px;/* -webkit-transition-delay:0s; */}
+		.rose2{width: 121px;height: 118px;background: url(../images/rose2.png) no-repeat;top: 122px;left: 270px;/* -webkit-transition-delay:0.4s; */}
+		.rose3{width: 109px;height: 130px;background: url(../images/rose3.png) no-repeat;top: 268px;left: 378px;/* -webkit-transition-delay:0.8s; */}
+		.rose4{width: 92px;height: 101px;background: url(../images/rose4.png) no-repeat;top: 506px;left: 234px;/* -webkit-transition-delay:1.2s; */}
 	}
 	.basket{z-index: 4;width: 313px;height: 453px;background: url(../images/basket.png) no-repeat;bottom:0;right: 0px;-webkit-transform:translateY(300px);opacity: 0;-webkit-transition:all 1.2s 5.3s ease-in-out;}
 	.tip{z-index: 4;width: 263px;height: 103px;background: url(../images/rose-tip.png) no-repeat;bottom: 70px;left: 145px;opacity: 0;-webkit-transition:all 1s 6s ease-in-out;}
@@ -140,7 +140,7 @@ body{width:100%;height: 100%;position: relative;/* background: url(../images/bg.
 	}
 }
 .collect-rose{
-	width: 100%;height: 100%;z-index: 14;background: url(../images/collect-rose.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
+	overflow: hidden;width: 100%;height: 100%;z-index: 14;background: url(../images/collect-rose.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
 	.rose1{width: 79px;height: 77px;background: url(../images/r1.png) no-repeat;top: 540px;left: 120px;}
 	.rose2{width: 60px;height: 57px;background: url(../images/r2.png) no-repeat;top: 545px;left: 405px;}
 	.rose3{width: 53px;height: 51px;background: url(../images/r3.png) no-repeat;top: 600px;left: 521px;}
@@ -165,10 +165,16 @@ body{width:100%;height: 100%;position: relative;/* background: url(../images/bg.
 	}
 }
 .mkl-po{
-	width: 100%;height: 100%;z-index: 12;background: url(../images/complete.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
+	overflow: hidden;width: 100%;height: 100%;z-index: 12;background: url(../images/complete.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
 	.hand-tip{width: 300px;height: 250px;bottom: 80px;right: 0;z-index: 41;
 		.hand{width: 163px;height: 178px;background: url(../images/hand2.png) no-repeat;}
 		.tip{width: 242px;height: 105px;background: url(../images/tm.png) no-repeat;}
+	}
+	.content{
+		position: absolute;
+	    width: 360px;
+	    height: 69px;left: 50%;margin-left: -360px/$m;
+	    top: 90px;display: none;
 	}
 	#canvas{
 	    width: 100%;
@@ -188,7 +194,7 @@ body{width:100%;height: 100%;position: relative;/* background: url(../images/bg.
 	}
 }
 .apply-page{
-	width: 100%;height: 100%;z-index: 10;background: url(../images/wishbg.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
+	overflow: hidden;width: 100%;height: 100%;z-index: 10;background: url(../images/wishbg.jpg) no-repeat;opacity: 0;-webkit-transition:all 2s 1.5s ease-in-out;
 	.wishtitle{width: 530px;height: 442px;margin: 0 auto;margin-top: 15px;}
 	.detail{width: 436px;height: 83px;margin: 0 auto;margin-top: 3px;}
 	.tip{width: 296px;height: 34px;margin: 0 auto;margin-top: 18px;}
