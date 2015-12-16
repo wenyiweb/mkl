@@ -29,6 +29,7 @@ function fade(id,type,cb){
 function coverFn(){	
 	$('.door-content').on('touchend',function(e){
 		e.preventDefault();
+		blingFn.m1play();
 		$('.yun-content .yun,.door-content .door,.huayuan').addClass('on');
 		$('.huayuan').one('webkitTransitionEnd',function(){
 			$('.yun-content,.door-content').hide();
@@ -87,10 +88,13 @@ function searchRose(){
 	    });
 	});
 	$('.search-rose .rose').one('touchend',function(){
+		blingFn.m1pause();
+		blingFn.m1play();
 		$('.search-rose .tip').css('-webkit-animation','none').fadeOut();
 		rosecount++;
 		var id = $(this).data('id');
 		$(this).addClass('animatenone');
+		
 		if(id==1){
 			$('.search-rose .rose1').css({
 				'-webkit-transform':'translate3d('+($('.basket').offset().left-$('.rose1').offset().left+27)+'px,'+($('.basket').offset().top-$('.rose1').offset().top+176)+'px,0)'
@@ -146,6 +150,8 @@ function collectRose(){
 		$('.search-rose').removeClass('on').hide();
 	});
 	$('.collect-rose .rose').one('touchend',function(){
+		blingFn.m1pause();
+		blingFn.m1play();
 		$('.collect-rose .tip,.collect-rose .hand').fadeOut();
 		rosecount++;
 		$(this).css('-webkit-animation','none');
@@ -175,6 +181,7 @@ function applyFn(){
 		$('.mkl-po').removeClass('on').hide();
 	});
 	$('.apply').on('click',function(){
+		blingFn.m1play();
 		addUser();
 	})
 }
@@ -458,6 +465,9 @@ var blingFn = {
 	},
 	m1play:function(){
 		document.querySelector('.bling #m1').play();
+	},
+	m1pause:function(){
+		document.querySelector('.bling #m1').pause();
 	},
 	m2play:function(){
 		document.querySelector('.bling #m2').play();
