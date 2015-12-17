@@ -1,407 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>punky</title>
-	<script>
-		var phoneWidth =  parseInt(window.screen.width);
-				var phoneScale = phoneWidth/750;
-				var ua = navigator.userAgent;
-				if (/Android (\d+\.\d+)/.test(ua)){
-					var version = parseFloat(RegExp.$1);
-					if(version>2.3){
-						document.write('<meta name="viewport" content="width=750, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
-					}else{
-						document.write('<meta name="viewport" content="width=750, target-densitydpi=device-dpi">');
-					}
-				} else {
-					document.write('<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">');
-				}
+	<meta charset="UTF-8">	
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script>!function(e){function t(){var t=o.getBoundingClientRect().width;t/i>540&&(t=540*i),e.rem=t/16,o.style.fontSize=e.rem+"px"}var i,n,a,r=e.document,o=r.documentElement,l=r.querySelector('meta[name="viewport"]'),d=r.querySelector('meta[name="flexible"]');if(l){console.warn("将根据已有的meta标签来设置缩放比例");var s=l.getAttribute("content").match(/initial\-scale=(["']?)([\d\.]+)\1?/);s&&(n=parseFloat(s[2]),i=parseInt(1/n))}else if(d){var s=d.getAttribute("content").match(/initial\-dpr=(["']?)([\d\.]+)\1?/);s&&(i=parseFloat(s[2]),n=parseFloat((1/i).toFixed(2)))}if(!i&&!n){var m=(e.navigator.appVersion.match(/android/gi),e.navigator.appVersion.match(/iphone/gi)),i=e.devicePixelRatio;i=m?i>=3?3:i>=2?2:1:1,n=1/i}if(o.setAttribute("data-dpr",i),!l)if(l=r.createElement("meta"),l.setAttribute("name","viewport"),l.setAttribute("content","initial-scale="+n+", maximum-scale="+n+", minimum-scale="+n+", user-scalable=no"),o.firstElementChild)o.firstElementChild.appendChild(l);else{var c=r.createElement("div");c.appendChild(l),r.write(c.innerHTML)}e.dpr=i,e.addEventListener("resize",function(){clearTimeout(a),a=setTimeout(t,300)},!1),e.addEventListener("pageshow",function(e){e.persisted&&(clearTimeout(a),a=setTimeout(t,300))},!1),"complete"===r.readyState?r.body.style.fontSize=12*i+"px":r.addEventListener("DOMContentLoaded",function(e){r.body.style.fontSize=12*i+"px"},!1),t()}(window);
+				document.addEventListener('touchmove', function(e){
+	e.preventDefault();
+},false);
 	</script> 
-	<link rel="stylesheet" href="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/css/style.css">
-	<script>document.addEventListener('touchmove',function(e){e.preventDefault()},false)</script>
-	<script>
-		var gamestart = '';
-		var key = '';
-	</script>
 
+	<script>
+		/*var phoneWidth =  parseInt(window.screen.width);
+		var phoneScale = phoneWidth/640;
+		var ua = navigator.userAgent;
+		if (/Android (\d+\.\d+)/.test(ua)){
+			var version = parseFloat(RegExp.$1);
+			if(version>2.3){
+				document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+			}else{
+				document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+			}
+		} else {
+			document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+		}
+		document.addEventListener('touchmove', function(e){
+			e.preventDefault();
+		},false);*/
+	</script>
+	<title>麦考林</title>
+	<link rel="stylesheet" href="http://p5.yokacdn.com/pic/div/2015/topic/06/nzz/css/swiper.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script>
+		//如图片路径是http://192.168.55.114/my/vaseline/images/bg.jpg
+		//var IMG_PATH = 'http://192.168.55.114/my/vaseline/';
+		var IMG_PATH = '';//资源文件地址
+		var canvasImg = 'images/canv.jpg';
+	</script>
 </head>
 <body>
-	<div class="loading ab" >
-		<p class="percent">0%</p>
-	</div>
-	<div class="cover ab" style="display:none;">
-		<div class="logo ab">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/logo2.png" class="lg ab">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/q1.png" class="q1 ab">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/q2.png" class="q2 ab">
-		</div>
-		<div class="kt ab">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/kt3.png" class="kt-t ab">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/kt-shadow.png" class="kt-s ab">
-		</div>
-		<div class="kt-people ab">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/100_1.png" id="kt-p">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/ggg.png" alt="">
-			<div class="instr ab">
-				<div class="tip-icon ab"></div>
-			</div>
-			<div class="btns ab">
-				<a href="javascript:void(0)" class="start"></a>
-				<a href="javascript:void(0)" class="rank"></a>
-			</div>
-		</div>
-		<div class="gz">
-			<div class="content-box">
-				<div class="scroll-body" id="gz-scroll">
-					<div class="wrapper" style="">
-						<div class="con">
-							<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/gz1.png" alt="">
-							<p style="margin-top:33px;">游戏开始后，请在30s点击找出相同的卡通形象，看看谁才是朋友圈里过目不忘的天才吧！</p>
-							<p class="yel" style="margin-top:15px;">活动时间：12.08-12.12</p>
-							<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/gz2.png" alt="">
-						
-							<p class="jp">
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-2.jpg">
-							</p>
-							<p class="jp">
-								<a data-jd="1" class="jp3_1"></a>
-								<a data-jd="2" class="jp3_2"></a>
-								<a data-jd="3" class="jp3_3"></a>
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-3-2.jpg">
-							</p>
-							<p class="jp">
-								<a data-jd="4" class="jp4_1"></a>
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-4-2.jpg">
-							</p>
-							<p class="jp">
-								<a data-jd="5" class="jp5_1"></a>
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-5-2.jpg">
-							</p>
-							<p class="jp">
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-6.jpg">
-							</p>
-							<p class="jp">
-								<a data-jd="6" class="jp7_1"></a>
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-7-2.jpg">
-							</p>
-							<p class="jp">
-								<a data-jd="7" class="jp8_1"></a>
-								<a data-jd="8" class="jp8_2"></a>
-								<a data-jd="9" class="jp8_3"></a>
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-8-2.jpg">
-							</p>
-							<p class="jp">
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-9.jpg">
-							</p>
-							<p class="jp">
-								<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/jd-1.jpg">
-							</p>
-							<!--<p><span class="bor yel">特等奖 1 名</span>           韩国双人自由行</p>
-							<p><span class="bor yel">一等奖 3 名 </span>          PP白雪公主系列大礼包</p>
-							<p><span class="bor yel">二等奖 5 名</span>          PP精美化妆镜一枚</p>
-							<p><span class="bor yel">三等奖 10 名</span>       PP可爱猫咪耳钉一副</p>
-							<p><span>参与奖 50 名</span>       PP旗舰店50元购物券一张</p>
-							<p><span>任性奖 10 名</span>      双12当天随意抽取参与者10名,送超值大礼</p>
-							<p><span>分享奖 1 名</span>		成功邀请好友参与游戏次数最多的用户，送精美手机壳1个。</p> 
-							<div class="line"></div>
-							<p>备注：获奖名单将在12月13日通过公众号公布，请注意查看获奖信息。</p> -->
-						</div>
-					</div>
-				</div>
-			</div>
-			<a href="javascript:void(0);" class="close" data-id="gz"></a>
-		</div>
-		<div class="myresult">
-			<div class="content">
-				<div class="cover-result-score rel">
-					<div>
-						<em class="s2"></em>
-						<em class="s4"></em>
-						<em class="s0"></em>
-						<em class="s0"></em>
-					</div>
-				</div>
-				<p class="rp">您当前排名第<span>11</span>名</p>
-				<div class="cover-ranklist">
-						<nav>
-							<a href="javascript:void(0);" class="cover-allrank on" data-id="cover-allrank" data-out="cover-frendrank">总排行榜</a>
-							<a href="javascript:void(0);" class="cover-frendrank" data-id="cover-frendrank" data-out="cover-allrank">好友积分榜</a>
-						</nav>
-						<div id="cover-allrank">
-							<div class="scroll-body" id="cover-allrank-scroll">
-								<div class="wrapper" style="">
-									<div class="items">
-										<div class="rank-item">
-											<em>1.</em>
-											<span class="photo">
-												<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/test.jpg" alt="">
-											</span>
-											<span class="name">小叔叔的胡子拉</span>
-											<span class="ls">1000</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="cover-frendrank">
-							<div class="scroll-body" id="cover-frendrank-scroll">
-								<div class="wrapper" style="">
-									<div class="items">
-										<div class="rank-item">
-											<em>1.</em>
-											<span class="photo">
-												<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/test.jpg" alt="">
-											</span>
-											<span class="name">小叔叔的胡子拉</span>
-											<span class="ls">1000</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-				</div>
-				<div class="btns2">
-					<a href="javascript:void(0)" class="start2"></a>
-					<a href="javascript:void(0)" class="sfrend2"></a>
-				</div>
-			</div>
-			<a href="javascript:void(0);" class="close"  data-id="myresult"></a>
-		</div>
-	</div>
-	<div class="game" style="display:none;">
-		<div id="djs" class="ab"></div>
-		<div id="go" class="ab"></div>
-		<div class="score ab">
-			<div></div>
-		</div>
-		<div id="game-content" class="ab">
-			
-		</div>
-		<div class="timeline ab">
-			<div class="tl ab"></div>
-			<div class="timelinecover ab"></div>
-		</div>
-		
-	</div>
-	<div class="result ab" style="display:none;">
-		<div class="content">
-			<img src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/rb.png" style="position:absolute;top:0;left:0;"> 
-			<div class="result-score rel">
-				<div>
-					<em class="s4"></em>
-					<em class="s4"></em>
-					<em class="s4"></em>
-					<em class="s4"></em>
-				</div>
-			</div>
-			<div class="fail"></div>
-			<div class="su"></div>
-			
-			<div class="addressinfo-ranklist" style="width:570px;">
-				<div class="ranklist back on">
-					<nav>
-						<a href="javascript:void(0);" class="allrank on" data-id="allrank" data-out="frendrank">总排行榜</a>
-						<a href="javascript:void(0);" class="frendrank" data-id="frendrank" data-out="allrank">好友积分榜</a>
-					</nav>
-					<div id="allrank">
-						<div class="scroll-body" id="allrank-scroll">
-							<div class="wrapper" style="">
-								<div class="items">									
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<img src="http://pop.youluxe.com/adcheck/exposure/595" style="width:0px;height:0px;position:absolute;overflow:hidden">
-					<div id="frendrank">
-						<div class="scroll-body" id="frendrank-scroll">
-							<div class="wrapper" style="">
-								<div class="items">
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<p class="rp" style="color:#000;">游戏中所有卡通形象，可在punkyplanet旗舰店购买</p>
-				</div>
-				<div class="addressinfo front on">
-					<div class="qcode"></div>
-					<div class="form-item">联系人<input type="text" id="contact"></div>
-					<div class="form-item">联系电话<input type="tel" id="phone"></div>
-					<div class="form-item">收货地址<input type="text" id="address"></div>
-					<div class="subsuc"></div>
-				</div>
-			</div>
-		<div class="btns">
-			<a href="javascript:void(0)" class="restart"></a>
-			<a href="javascript:void(0)" class="sfrend"></a>
-		</div>
-		<div class="submit"></div>
-		</div>
-		<!-- <div class="dialog">
-			<div class="content">
-				<div class="close"></div>
-				<h2>喵口令</h2>
-				<p></p>
-			</div>
-		</div> -->
-		<!-- <a href="javascript:void(0);" class="close"  data-id="result"></a> -->
-	</div>
-	<div class="share"></div>
-	<div class="dialog">
-		<div class="content">
-			<div class="close"></div>
-			<h2>喵口令</h2>
-			<p></p>
-		</div>
-	</div>
-	<script type="text/javascript" src="http://p5.yokacdn.com/pic/div/2015/topic/06/nzz/js/jquery-2.1.1.min.js"></script>
-	<script src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/js/iscroll.js"></script>
-	<script src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/js/preloader.min.js"></script>
-	
-	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-	<script type="text/javascript" src="http://p5.yokacdn.com/pic/div/2015/products/fujun2.0.1/js/share.js"></script>
-	<script src="http://p5.yokacdn.com/pic/div/2015/topic/11/punky/js/app.js"></script>
-	<script type="text/javascript">
-        //分享   title：标题   desc:描述   imgUrl:分享图片
-        var shareData = {
-        	imgUrl: 'http://p5.yokacdn.com/pic/div/2015/topic/11/punky/images/100.jpg',
-            title: '朋克之星免费机票大作战',
-            desc: '玩朋克之星小游戏 赢韩国双人自由行',
-            link: window.location.href
-          };
-    </script>
-	<script>
-	/*天猫口令*/
-	var kl = {
-		"1":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品白雪公主系列苹果iPhone6Plus手机壳保护套】 ￥AABgGoUy￥淘口令',
-		"2":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品白雪公主系列便携手柄化妆镜手镜随身镜镜子】 ￥AABgGUun￥淘口令',
-		"3":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品白雪公主便携公交卡套证门禁卡卡名片卡夹】 ￥AABgGwUv￥淘口令',
-		"4":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品白雪公主皇后魔女便携镜美容化妆镜子手镜】 ￥AABgGnNq￥淘口令',
-		"5":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品动物系列可爱猫咪耳环耳钉女防过敏银耳饰】 ￥AABgGXtj￥淘口令',
-		"6":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品白雪公主系列便携手柄化妆镜手镜随身镜镜子】 ￥AABgGUun￥淘口令',
-		"7":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品时尚系列高傲的女孩苹果iPhone6Plus手机壳】 ￥AABgGoUP￥淘口令',
-		"8":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品时尚系列高傲的女孩苹果iPhone6Plus手机壳】 ￥AABgGoUP￥淘口令',
-		"9":'复制这条信息，打开 手机淘宝 即可看到【 punky planet韩国正品时尚系列高傲的女孩苹果iPhone6Plus手机壳】 ￥AABgGoUP￥淘口令'
-	};
-	var allrank = null,frendrank = null;
-		//收集用户积分
-		function collectUserScore(score,gameend){
-			$.ajax({
-				url:'/PunkyPlanet/index.php?action=addgrade',
-				data:{'grade':score,'gamestart':gamestart,'gameend':gameend,'key':key},
-				type:"POST",
-				success:function(data){
-					
-				}
-			});
-		}
-		//获取总排名数据 前20条记录 
-		//返回总排名list和当前排名
-		function getRankList(){
-			$.ajax({
-				  type: "GET",
-				  url: "/PunkyPlanet/index.php?action=alltoplist&size=20",
-				  dataType: "json",
-				  callback:'callback',
-				  success: function(data){
-				  	//渲染总排名列表
-					renderRanklist(data.list,'all');
-				  }
-			});
-		}
-		function renderRanklist(data,type){
-			var html = '';
-			for(var i=0; i<data.length;i++){
-				html += '<div class="rank-item"><em>'+(i+1)+'.</em><span class="photo"><img src="'+data[i].photo+'"></span>';
-				html += '<span class="name">'+data[i].nickname+'</span><span class="ls">'+data.score+'</span></div>';
-			}
-			if(type == 'all'){
-				$('#allrank .items').html(html);
-				allrank = new IScroll('#allrank-scroll',{preventDefault:true});//scrollY:true,scrollbars: 'custom',preventDefault:true
-			}else{
-				$('#frendrank .items').html(html);
-				frendrank = new IScroll('#frendrank-scroll',{preventDefault:true});//destroy
 
-			}
-		}
-		//获取好友排名数据
-		function getFrendRankList(){
-			$.ajax({
-				  type: "GET",
-				  url: "/PunkyPlanet/index.php?action=frendtoplist&size=20",
-				  dataType: "json",
-				  callback:'callback',
-				  success: function(data){
-				  	//渲染总排名列表
-					renderRanklist(data.list,'frend');
-				  }
+	<!--寻找玫瑰页 s-->
+	<div class="search-rose ab">
+		<div class="rose-content ab">
+			<div class="rose rose1 ab" data-id="1"></div>
+			<div class="rose rose2 ab" data-id="2"></div>
+			<div class="rose rose3 ab" data-id="3"></div>
+			<div class="rose rose4 ab" data-id="4"></div>
+		</div>
+		<div class="basket ab">
+			
+		</div>
+		<div class="rose rose1 ab"></div>
+			<div class="rose rose2 ab"></div>
+			<div class="rose rose3 ab"></div>
+			<div class="rose rose4 ab"></div>
+		<div class="tip ab"></div>
+		<p class="desc ab">当清晨第一缕光洒向玫瑰园。</p>
+		<p class="desc ab desc2">在恰好的温度、恰好的水分，遇见最美的玫瑰</p>
+		<!-- <div class="ab hb"></div>
+		<div class="mask"></div> -->
+	</div>
+	<!--寻找玫瑰页 e-->
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="js/snowfall.js"></script>
+	<script type="text/javascript" _src="js/iscroll.js"></script>
+	<script type="text/javascript" src="js/swiper.js"></script>
+	<script type="text/javascript">
+	function searchRose(){
+	
+
+	var rosecount = 0;
+	$('.search-rose').addClass('on');
+	$('.search-rose').one('webkitTransitionEnd',function(){
+		
+	});
+	$('.search-rose .rose').one('touchend',function(){
+		$('.search-rose .tip').css('-webkit-animation','none').fadeOut();
+		rosecount++;
+		var id = $(this).data('id');
+		$(this).addClass('animatenone');
+		
+		if(id==1){
+			console.log($('.basket').offset().left+"::"+$('.rose1').offset().left)
+			$('.search-rose .rose1').css({
+				'-webkit-transform':'translate3d(4.35rem,18rem,0)'
+			});
+		}else if(id == 2){
+			$('.search-rose .rose2').css({
+				'-webkit-transform':'translate3d(4.7rem,14rem,0)'
+			});
+		}else if(id == 3){
+			$('.search-rose .rose3').css({
+				'-webkit-transform':'translate3d(0.5rem,11.25rem,0)'
+			});
+		}else if(id == 4){
+			$('.search-rose .rose4').css({
+				'-webkit-transform':'translate3d(6.35rem,6rem,0)'
 			});
 		}
-		//获取我的总排名
-		function getMyAllRank(){
-			$.ajax({
-				  type: "GET",
-				  url: "/PunkyPlanet/index.php?action=allrank",
-				  dataType: "json",
-				  callback:'callback',
-				  success: function(data){
-				  	//渲染总排名列表
-					$('#position').html(data.xx);
-				  }
-			});
+		if(rosecount == 4){
+			/*$('.rose'+id).on('webkitTransitionEnd',function(){
+				collectRose();
+			});	*/
 		}
-		//提交用户信息
-		function submitUserInfo(){
-			var name = $('contact').val();
-			var phone = $('#phone').val();
-			var address = $('#address').val();
-			var phoneReg = /^13[0-9]{9}$|14[0-9]{9}$|15[0-9]{9}$|18[0-9]{9}$/;
-			if(name==''||name=='联系人'){
-				alert('请输入联系人');
-				$('#contact').focus();
-				return false;
-			}
-			if(phone==''){
-				alert('请输入手机号');
-				$('#phone').focus();
-				return;
-			}else if(!phone.match(phoneReg)){
-				alert('请输入正确的手机号码');
-				$('#phone').focus();
-				return false;
-			}
-			if(address==''||address=='收货地址'){
-				alert('请输入收货地址');
-				$('#address').focus();
-				return false;
-			}
-			$.ajax({
-				url:'/PunkyPlanet/index.php?action=setinfo',
-				data:{'truename':name,'telphone':phone,'address':address},
-				type:"POST",
-				success:function(data){
-					if(data.status == 1){
-						$('.form-item').fadeOut(function(){
-							$('.subsuc').fadeIn(function(){
-								setTimeout(function(){
-									$('.ranklist,.addressinfo').addClass('on');
-									$('.result .btns').fadeIn();
-									$('.result .submit').fadeOut();
-								},2000);
-							});
-						});
-					}else{
-						alert('提交失败。');
-					}
-					
-				}
-			});
-		}
+	});
+}
+searchRose();
+</script>
+	<script>
+		//分享   title：标题   desc:描述   imgUrl:分享图片
+    var shareData = {
+    	imgUrl: IMG_PATH+'images/100.jpg',
+        title: '',
+        desc: '',
+        link: window.location.href,
+        success:function(){}
+      };	
 	</script>
-	<script>var game = new Game();</script>
 </body>
 </html>
