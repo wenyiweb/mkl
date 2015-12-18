@@ -170,7 +170,7 @@ function applyFn(){
 }
 //报名
 function addUser(){
-		var url = "http://www.cosmopolitan.com.cn/files/eventapi.php?c=EventApiNew&a=AddEvent&indexsId=617&callbackfun=addUserCallback";  
+		var url = "http://www.cosmopolitan.com.cn/files/eventapi.php?c=EventApiNew&a=AddEvent&indexsId=618&callbackfun=addUserCallback";  
 		var name = $('#form_name').val();
 		var phone = $('#form_tel').val();
 		var wish = $('#form_wish').val();
@@ -195,9 +195,9 @@ function addUser(){
 			return false;
 		}
 		var data = { 
-			"data[2473]": phone,//手机 
-			"data[2474]": name,//真实姓名 
-			"data[2475]": wish,//願望
+			"data[2476]": phone,//手机 
+			"data[2477]": name,//真实姓名 
+			"data[2478]": wish,//願望
 		};
 		$.ajax({
 			url:url,
